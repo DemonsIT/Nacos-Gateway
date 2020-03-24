@@ -12,17 +12,17 @@ spring:
           lower-case-service-id: true
       routes:
         - id: server
-          uri: lb://server
+          uri: lb://SERVER
           predicates:
             - Path=/server/**
         - id: sdk
-          uri: lb://sdk
+          uri: lb://SDK
           predicates:
             - Path=/sdk/**
         - id: dataview
-          uri: lb://dataview
+          uri: lb://DATAVIEW
           predicates:
-            - Path=/dataview/**
+            - Path=/api
     nacos:
       discovery:
         server-addr: http://localhost:8848
