@@ -2,7 +2,7 @@ server:
   port: 9990
 spring:
   application:
-    name: BONREE-GATEWAY
+    name: GATEWAY
   cloud:
     gateway:
       discovery: #是否与服务发现组件进行结合，通过 serviceId(必须设置成大写) 转发到具体的服务实例。
@@ -20,9 +20,9 @@ spring:
           predicates:
             - Path=/sdk/**
         - id: dataview
-            uri: lb://dataview
-            predicates:
-              - Path=/dataview/**
+          uri: lb://dataview
+          predicates:
+            - Path=/dataview/**
     nacos:
       discovery:
         server-addr: http://localhost:8848
