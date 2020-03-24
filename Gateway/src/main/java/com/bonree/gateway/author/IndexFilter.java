@@ -11,9 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Bonree
  * 网关入口鉴权
  * TODO:待实现
+ * @author Bonree
  */
 // @Component
 public class IndexFilter implements WebFilter, Ordered {
