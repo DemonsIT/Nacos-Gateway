@@ -9,11 +9,6 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     
-    <!-- 子模块统一管理 -->
-    <modules>
-        <module>Gateway</module>
-    </modules>
-
     <!-- 版本号&编码格式统一定义 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -1,29 +1,50 @@
 server:
   port: 9990
+  tomcat:
+    uri-encoding: UTF-8
 spring:
+  profiles:
+    active: dev
   application:
     name: gateway
   cloud:
     gateway:
-      discovery: #是否与服务发现组件进行结合，通过 serviceId(必须设置成大写) 转发到具体的服务实例。
-        # 默认为false，设为true便开启通过服务中心的自动根据 serviceId 创建路由的功能。
-        locator: #路由访问方式：http://Gateway_HOST:Gateway_PORT/大写的serviceId/**，其中微服务应用名默认大写访问。
+      discovery:
+        locator:
           enabled: true
+          # serviceId统一使用小写字母
           lower-case-service-id: true
       routes:
         - id: server
-          uri: lb://SERVER
+          uri: lb://server
           predicates:
             - Path=/server/**
         - id: sdk
-          uri: lb://SDK
+          uri: lb://sdk
           predicates:
             - Path=/sdk/**
         - id: dataview
           uri: lb://dataview
           predicates:
-            - Path=/api
+            - Path=/dataview/**
+---
+spring:
+  profiles: dev
+  cloud:
     nacos:
       discovery:
         server-addr: http://192.168.4.73:8848
-        group: BONREE
+---
+spring:
+  profiles: test
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.240.48.52:8848
+---
+spring:
+  profiles: prod
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.240.48.53:8848

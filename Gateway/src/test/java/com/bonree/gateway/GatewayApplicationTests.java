@@ -1,10 +1,10 @@
-package com.bonree.demo;
+package com.bonree.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class GatewayApplicationTests {
     
     @Test
     void contextLoads() {
