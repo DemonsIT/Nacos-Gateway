@@ -1,0 +1,3 @@
+Bonree 网关服务
+采用Alibaba的nacos作为配置中心,服务注册和发现组件
+Spring cloud gateway作为鉴权&路由转发组件
