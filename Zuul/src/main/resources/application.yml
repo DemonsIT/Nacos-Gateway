@@ -9,8 +9,8 @@ zuul:
 #    token:
 #      url: http://localhost:9090
     orderServer:
-      path: /dataview/**
-      serviceId: dataview
+      path: /dataview-zuul/**
+      serviceId: dataview-zuul
     #      url: http://localhost:9060
     priceServer:
       path: /prices/**

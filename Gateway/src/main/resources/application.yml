@@ -24,9 +24,9 @@ spring:
           predicates:
             - Path=/sdk/**
         - id: dataview
-          uri: lb://dataview
+          uri: lb://dataview-gateway
           predicates:
-            - Path=/dataview/**
+            - Path=/dataview-gateway/**
 ---
 spring:
   profiles: dev
