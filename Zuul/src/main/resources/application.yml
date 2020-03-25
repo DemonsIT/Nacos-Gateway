@@ -48,22 +48,4 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
-        # 指定namespace 这个可以做到开发环境，预发环境，线上环境的隔离，同环境才可以调用
-#        namespace: cede430e-9610-42ba-9a1e-11bd98ab747e
-        # 同城集群名称，需要改造Ribbon优先调用同城集群，同城集群不可用时可以跨城调用，用于异地灾备
-#        cluster-name: shanghai
-#        metadata:
-          # 自己这个实例的版本
-#          version: V1
-          # 允许调用的提供者版本
         group: BONREE
-#          target-version: V1
-#security:
-#  oauth2:
-#    client:
-#      #这里的数据和数据库表中记录对应
-#      client-id: gateway
-#      client-secret: 123456
-#    resource:
-#      jwt:
-#        key-uri: http://auth.yibo.com:9090/oauth/token_key
