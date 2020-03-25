@@ -1,0 +1,69 @@
+server:
+  port: 8880
+zuul:
+  host:
+    connect-timeout-millis: 3000
+    socket-timeout-millis: 3000
+  routes:
+    #这里没有使用服务发现组件，所以将服务服务地址写死
+#    token:
+#      url: http://localhost:9090
+    orderServer:
+      path: /dataview/**
+      serviceId: dataview
+    #      url: http://localhost:9060
+    priceServer:
+      path: /prices/**
+      serviceId: priceServer
+    #这里配置user服务只是需要用此在MFfilter上处理，不是向下转发
+  #    user:
+  #      url: http://localhost:9060
+  #zuul.sensitiveHeaders设置为空，代表不过滤任何Header信息，Header会向下转发
+  sensitive-headers:
+  ratelimit:
+    enabled: true
+    repository: redis  #对应存储类型（用来存储统计信息）
+    behind-proxy: true  #代理之后
+    default-policy-list: #可选 - 针对所有的路由配置的策略，除非特别配置了policies
+      - limit: 100 #可选 - 每个刷新时间窗口对应的请求数量限制
+        quota: 1000 #可选-  每个刷新时间窗口对应的请求时间限制（秒）
+        refresh-interval: 60 # 刷新时间窗口的时间，默认值 (秒)
+        type: #可选 限流方式
+          - url
+          - httpmethod
+          - origin
+    policy-list: #可选 - 针对所有的路由配置的策略，除非特别配置了policies
+      token: #特定的路由
+        - limit: 100 #可选 - 每个刷新时间窗口对应的请求数量限制
+          quota: 100 #可选-  每个刷新时间窗口对应的请求时间限制（秒）
+          refresh-interval: 3 # 刷新时间窗口的时间，默认值 (秒)
+          type: #可选 限流方式
+            - url
+            - httpmethod
+            - origin
+spring:
+  application:
+    name: zuul-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        # 指定namespace 这个可以做到开发环境，预发环境，线上环境的隔离，同环境才可以调用
+#        namespace: cede430e-9610-42ba-9a1e-11bd98ab747e
+        # 同城集群名称，需要改造Ribbon优先调用同城集群，同城集群不可用时可以跨城调用，用于异地灾备
+#        cluster-name: shanghai
+#        metadata:
+          # 自己这个实例的版本
+#          version: V1
+          # 允许调用的提供者版本
+        group: BONREE
+#          target-version: V1
+#security:
+#  oauth2:
+#    client:
+#      #这里的数据和数据库表中记录对应
+#      client-id: gateway
+#      client-secret: 123456
+#    resource:
+#      jwt:
+#        key-uri: http://auth.yibo.com:9090/oauth/token_key
