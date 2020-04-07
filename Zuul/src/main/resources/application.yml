@@ -1,5 +1,5 @@
 server:
-  port: 8880
+  port: 8881
 zuul:
   host:
     connect-timeout-millis: 3000
@@ -7,10 +7,10 @@ zuul:
   routes:
     #这里没有使用服务发现组件，所以将服务服务地址写死
 #    token:
-#      url: http://localhost:9090
+#    url: http://localhost:8880
     orderServer:
-      path: /dataview-zuul/**
-      serviceId: dataview-zuul
+      path: /**
+      serviceId: dataview
     #      url: http://localhost:9060
     priceServer:
       path: /prices/**
@@ -48,4 +48,3 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
-        group: BONREE
